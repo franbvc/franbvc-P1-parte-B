@@ -1,0 +1,27 @@
+{% extends "notes/index.html" %}
+{% load static %}
+
+{% block noteList %}
+
+{% for note in notes %}
+<div class="card">
+
+  <div class="card-header">
+    <!-- Trigger/Open The Modal -->
+    <button class="modal-button" value="{{ note.id }}"><i class="fa fa-edit"></i></button>  
+    <h3 class="card-title">{{ note.title }}</h3>
+  </div>
+
+  <div class="card-content">
+    <p>
+    {{ note.content }}
+    </p>
+  </div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
+
+

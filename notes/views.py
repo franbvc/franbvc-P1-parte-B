@@ -12,4 +12,16 @@ def index(request):
         return redirect('index')
     else:
         all_notes = Note.objects.all()
-        return render(request, 'notes/index.html', {'notes': all_notes})
+        return render(request, 'notes/note.html', {'notes': all_notes})
+
+def delete(request):
+    if request.method == 'POST':
+        id_to_delete = int(request.POST.get('delete'))
+        Note.objects.get(id=id_to_delete).delete()
+        
+        return redirect('index')
+    
+    else:
+        all_notes = Note.objects.all()
+        print(request)
+        return render(request, 'notes/note.html', {'notes': all_notes})
