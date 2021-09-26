@@ -1,0 +1,25 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<main class="container">
+    <h1 class="tag-page-title">Tags</h1>
+    <div class="card-container">
+      
+        {% for tag in tags %}
+        <div class="card" style="min-height: auto">
+
+            <form method="get" action="/tag-notes" style="justify-content: center; display: flex;">
+                <button name="tag" class="tag-title" type="submit" value="{{ tag.title }}">{{ tag.title }}</button>
+            </form>
+            
+        </div>
+        
+        {% endfor %}
+  
+    </div>
+  
+  </main>
+
+{% endblock %}
