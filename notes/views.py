@@ -25,3 +25,19 @@ def delete(request):
         all_notes = Note.objects.all()
         print(request)
         return render(request, 'notes/note.html', {'notes': all_notes})
+
+def update(request):
+    if request.method == 'POST':
+        id_to_update = int(request.POST.get('update'))
+
+        note_to_update = Note.objects.get(id=id_to_update)
+        note_to_update.title = request.POST.get('titulo')
+        note_to_update.content = request.POST.get('detalhes')
+
+        note_to_update.save()
+
+        return redirect('index')
+    
+    else:
+        all_notes = Note.objects.all()
+        return render(request, 'notes/note.html', {'notes': all_notes})
