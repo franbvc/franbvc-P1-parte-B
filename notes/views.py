@@ -63,6 +63,19 @@ def update(request):
         note_to_update.title = request.POST.get('titulo')
         note_to_update.content = request.POST.get('detalhes')
 
+        tag_to_update_title = request.POST.get('tag')
+
+        if tag_to_update_title == "":
+            note_to_update.tag = None
+            note_to_update.save()
+            return redirect('index')
+
+        if verify_tag_existence(tag_to_update_title):
+            tag_to_update = Tag.objects.get(title=tag_to_update_title)
+        else:
+            tag_to_update = create_new_tag(tag_to_update_title)
+
+        note_to_update.tag = tag_to_update
         note_to_update.save()
 
         return redirect('index')
